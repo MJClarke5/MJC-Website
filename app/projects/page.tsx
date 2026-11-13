@@ -22,11 +22,11 @@ export default async function ProjectsPage() {
   return (
     <main className="wrap page">
       <header className="page__head">
-        <p className="eyebrow">Projects</p>
-        <h1>Everything I&apos;ve built</h1>
+        <p className="eyebrow">Portfolio</p>
+        <h1>Projects &amp; Analysis</h1>
         <p className="lede">
           {repos.length > 0
-            ? `${repos.length} projects across coursework, analysis and live apps. Pick one to read the write-up.`
+            ? `${repos.length} projects spanning academic coursework, applied analysis and deployed applications. Select a project to view its full write-up.`
             : "Projects synced from GitHub."}
         </p>
       </header>

@@ -4,10 +4,10 @@ export const site = {
   githubUser: "MJClarke5",
   title: "Data Scientist",
   tagline:
-    "I build models, forecasts and text-analysis pipelines in R and Python, from football predictions to earnings-call sentiment.",
+    "I specialise in predictive modelling, time-series forecasting and natural language processing, using R and Python to turn complex data into clear, decision-ready insight. Recent work spans sports outcome prediction, financial sentiment analysis and pricing optimisation.",
   links: {
     github: "https://github.com/MJClarke5",
-    linkedin: "", // e.g. "https://www.linkedin.com/in/your-handle"
+    linkedin: "https://www.linkedin.com/in/clarkejmatthew",
     email: "", // e.g. "you@example.com"
   },
 

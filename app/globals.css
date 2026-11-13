@@ -173,3 +173,7 @@ section { margin-bottom: 64px; }
 /* Home: link through to all projects */
 .cta { padding: 32px; border: 1px dashed var(--border); border-radius: var(--radius); }
 .cta p { margin: 0 0 18px; }
+@media (max-width: 480px) {
+  .nav__links { gap: 14px; font-size: .85rem; }
+  .nav__brand { font-size: .9rem; }
+}
