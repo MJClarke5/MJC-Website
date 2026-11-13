@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { prettyName, splitDescription, type Repo } from "@/lib/github";
 
 const LANG_COLORS: Record<string, string> = {
@@ -31,14 +32,19 @@ export function ProjectCard({
     <article className={`card${featured ? " card--featured" : ""}`}>
       <header className="card__head">
         <h3 className="card__title">
-          <a href={repo.html_url} target="_blank" rel="noreferrer">
+          {/* Stretched link: its ::after covers the whole card, so clicking anywhere opens the page. */}
+          <Link href={`/projects/${repo.name}`} className="card__link">
             {title}
-          </a>
+          </Link>
         </h3>
         {term && <span className="card__term">{term}</span>}
       </header>
 
       {desc && <p className="card__desc">{desc}</p>}
+
+      <span className="card__more" aria-hidden="true">
+        Read more →
+      </span>
 
       <footer className="card__meta">
         <span className="card__repo">{repo.name}</span>

@@ -1,7 +1,7 @@
 import { site } from "@/site.config";
 import { getRepos } from "@/lib/github";
+import Link from "next/link";
 import { ProjectCard } from "@/components/ProjectCard";
-import { ProjectGrid } from "@/components/ProjectGrid";
 
 export const revalidate = 3600;
 
@@ -12,8 +12,6 @@ export default async function Home() {
     const repo = byName.get(f.repo);
     return repo ? [{ ...f, repo }] : [];
   });
-  const featuredNames = new Set(featured.map((f) => f.repo.name));
-  const rest = repos.filter((r) => !featuredNames.has(r.name));
   const languageCount = new Set(repos.map((r) => r.language).filter(Boolean)).size;
 
   return (
@@ -23,7 +21,10 @@ export default async function Home() {
         <h1>{site.name}</h1>
         <p className="lede">{site.tagline}</p>
         <nav className="hero__links">
-          <a className="pill pill--accent" href={site.links.github} target="_blank" rel="noreferrer">
+          <Link className="pill pill--accent" href="/projects">
+            View projects
+          </Link>
+          <a className="pill" href={site.links.github} target="_blank" rel="noreferrer">
             GitHub ↗
           </a>
           {site.links.linkedin && (
@@ -66,23 +67,17 @@ export default async function Home() {
         </section>
       )}
 
-      <section>
-        <h2 className="section-title">All projects</h2>
-        {rest.length > 0 ? (
-          <ProjectGrid repos={rest} />
-        ) : (
-          <p className="muted">
-            Couldn&apos;t load projects right now. See them on <a href={site.links.github}>GitHub</a>.
-          </p>
-        )}
+      <section className="cta">
+        <h2 className="section-title">More projects</h2>
+        <p className="muted">
+          {repos.length > 0
+            ? `Browse all ${repos.length} projects, filterable by language, each with its full write-up.`
+            : "Browse all projects, each with its full write-up."}
+        </p>
+        <Link className="pill pill--accent" href="/projects">
+          See all projects →
+        </Link>
       </section>
-
-      <footer className="foot">
-        <span>
-          © {new Date().getFullYear()} {site.name}
-        </span>
-        <span className="muted">Projects synced from GitHub hourly</span>
-      </footer>
     </main>
   );
 }

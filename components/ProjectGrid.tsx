@@ -1,8 +1,12 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { site } from "@/site.config";
 import type { Repo } from "@/lib/github";
 import { ProjectCard } from "./ProjectCard";
+
+// Reuse the blurbs/demo links from site.config so cards match the Featured section.
+const featuredInfo = new Map(site.featured.map(({ repo, ...info }) => [repo, info]));
 
 export function ProjectGrid({ repos }: { repos: Repo[] }) {
   const languages = useMemo(() => {
@@ -29,7 +33,7 @@ export function ProjectGrid({ repos }: { repos: Repo[] }) {
       </div>
       <div className="grid">
         {shown.map((r) => (
-          <ProjectCard key={r.name} repo={r} />
+          <ProjectCard key={r.name} repo={r} {...featuredInfo.get(r.name)} />
         ))}
       </div>
     </>
