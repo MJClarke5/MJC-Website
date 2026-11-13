@@ -8,6 +8,8 @@
   --accent-soft: #ccfbf1;
   --on-accent: #ffffff;
   --radius: 14px;
+  --glow: color-mix(in srgb, var(--accent) 20%, transparent);
+  --dots: color-mix(in srgb, var(--text) 15%, transparent);
   color-scheme: light dark;
 }
 @media (prefers-color-scheme: dark) {
@@ -20,17 +22,33 @@
     --accent: #2dd4bf;
     --accent-soft: #134e4a;
     --on-accent: #0c0a09;
+    --glow: color-mix(in srgb, var(--accent) 22%, transparent);
+    --dots: color-mix(in srgb, var(--text) 16%, transparent);
   }
 }
 
 * { box-sizing: border-box; }
+html { background: var(--bg); }
 body {
   margin: 0;
-  background: var(--bg);
+  position: relative;
+  min-height: 100vh;
   color: var(--text);
   font: 16px/1.6 ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 }
 a { color: inherit; }
+
+/* Page background: soft accent glow + faint dot grid behind the top of the page,
+   fading out so cards and README text sit on a clean background. */
+body::before {
+  content: ""; position: absolute; inset: 0 0 auto; height: 760px; z-index: -1; pointer-events: none;
+  background:
+    radial-gradient(ellipse 55% 60% at 15% 0%, var(--glow), transparent 70%),
+    radial-gradient(ellipse 45% 50% at 90% 10%, var(--glow), transparent 70%),
+    radial-gradient(circle, var(--dots) 1px, transparent 1.5px) 0 0 / 22px 22px;
+  -webkit-mask-image: linear-gradient(to bottom, #000 35%, transparent);
+  mask-image: linear-gradient(to bottom, #000 35%, transparent);
+}
 .muted { color: var(--muted); }
 
 .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }

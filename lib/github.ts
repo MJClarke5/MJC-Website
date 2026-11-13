@@ -40,7 +40,7 @@ export async function getRepos(): Promise<Repo[]> {
   }
 }
 
-// README rendered to HTML by GitHub (already sanitised), with relative links fixed.
+// README rendered to HTML by GitHub (already sanitized), with relative links fixed.
 export async function getReadmeHtml(repo: string, branch: string): Promise<string | null> {
   try {
     const res = await fetch(`https://api.github.com/repos/${site.githubUser}/${repo}/readme`, {
